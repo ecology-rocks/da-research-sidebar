@@ -27,6 +27,7 @@ function onOpen(){
     //This item will run the 'openSidebar' function (lower down on this page) and open a sidebar menu in your spreadsheet
     .addItem('Ecosystem Services Information', 'openESbar')
     .addItem('Forests & Climate Information', 'openFCbar')
+    .addItem('Dogwood Alliance Reports', 'openDLbar')
     //Adds a seperator line between the two menu items - optional
     .addSeparator()
     //This items will run the 'sayHello' function lower down on this page
@@ -56,6 +57,13 @@ function openFCbar(){
   var template = HtmlService.createTemplateFromFile('Forests & Climate')
       .evaluate()
       .setTitle('Forests & Climate Information')
+ DocumentApp.getUi().showSidebar(template);
+}
+
+function openDLbar(){
+    var template = HtmlService.createTemplateFromFile('Dogwood Alliance Reports')
+      .evaluate()
+      .setTitle('Dogwood Alliance Report Links')
  DocumentApp.getUi().showSidebar(template);
 }
 
@@ -98,6 +106,24 @@ function getScriptUrl() {
    
       if (cursor) {
         var element = cursor.insertText(myArr.join('\n\n'));
+        if (!element) {
+          DocumentApp.getUi().alert('Cannot insert text here, sorry!');
+        }
+      } else {
+        DocumentApp.getUi().alert('Cannot find a cursor, sorry! You can\'t have text highlighted while trying to insert.');
+      }        
+    }
+
+ function insertLinkAtCursor(link, title){     
+      var cursor = DocumentApp.getActiveDocument().getCursor(); 
+   
+   if(title == ''){
+    title = link; 
+   }
+   
+      if (cursor) {
+        var element = cursor.insertText(title);
+        element.setLinkUrl(link);
         if (!element) {
           DocumentApp.getUi().alert('Cannot insert text here, sorry!');
         }
