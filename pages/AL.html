@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<!-- Document Head -->
+<head>
+	<base target="_top"><!-- Add the Google Apps Script CSS file -->
+	<link href="https://ssl.gstatic.com/docs/script/css/add-ons1.css" rel="stylesheet"><!-- our friendly neighborhood bootstrap css -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+	<title></title>
+</head><!-- Document Body -->
+<body>
+	<!--?!= include('esText'); ?>  <!== proof of concept: header-->
+	<!-- Object structure: parent == object { title; text; cite } where title is a string and the others are arrays -->
+	<? var dataKeys = getDataKeys(alText); ?>
+	<? var data = getData(alText); ?>
+	<? var total = dataKeys.length; ?>
+	<!-- for each object in data -->
+	<? for (var i = 0; i < dataKeys.length; i++) { ?>
+	<div class="m-2 p-2 alert alert-secondary text-center">
+		<h5><?= data[dataKeys[i]].title; ?>
+		</h5>
+	</div>
+	<div class="ml-2 mr-2 mt-2 mb-2 alert alert-success">
+		<? var myText =data[dataKeys[i]].text; ?>
+		<? for (var j = 0; j < myText.length; j++) { ?>
+		<p><small><?!= myText[j]; ?>
+		</small></p><? } ?>
+		<div class="text-center mt-3 ml-3 mr-3 mb-3">
+			<button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].tFxn; ?>()">Insert Text At Cursor</button>
+		</div>
+	<!--/div><div class="ml-3 mr-3 mt-3 mb-3"-->
+		<? var myCites = data[dataKeys[i]].cite; ?>
+		<? for (var k = 0; k < myCites.length; k++) { ?>
+		<p><small><i><?!= myCites[k]; ?>
+		</i></small></p><? } ?>
+	<!--/div-->
+	<div class="text-center mt-3 ml-3 mr-3 mb-3">
+		<button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].cFxn; ?>()">Insert Citation At Cursor</button>
+	</div>
+	<div class="text-center mt-3 ml-3 mr-3 mb-3">
+		<button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].lFxn; ?>()">Insert Report Link At Cursor</button>
+	</div>
+	<div class="text-center mt-3 ml-3 mr-3 mb-3">
+		<button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].sFxn; ?>()">Insert State Link At Cursor</button>
+	</div>    
+    
+    
+    </div>
+    
+    
+    
+    <? } ?>
+</body>
+</html>
