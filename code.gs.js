@@ -45,19 +45,19 @@ function onOpen(){
                )
     .addSubMenu(ui.createMenu('State Specific Facts (In Development)')
                 .addItem('Alabama', 'openALbar')
-                /*.addItem('Arkansas', 'stillDev')
-                .addItem('Florida', 'stillDev')
-                .addItem('Georgia', 'stillDev')
-                .addItem('Kentucky', 'stillDev')
-                .addItem('Louisiana', 'stillDev')
-                .addItem('Mississippi', 'stillDev')
-                .addItem('Missouri', 'stillDev')
-                .addItem('North Carolina', 'stillDev')
-                .addItem('Oklahoma', 'stillDev')
-                .addItem('South Carolina', 'stillDev')
-                .addItem('Tennessee', 'stillDev')
-                .addItem('Texas', 'stillDev')
-                .addItem('Virginia', 'stillDev')*/
+                .addItem('Arkansas', 'openARbar')
+                .addItem('Florida', 'openFLbar')
+                .addItem('Georgia', 'openGAbar')
+                .addItem('Kentucky', 'openKYbar')
+                .addItem('Louisiana', 'openLAbar')
+                .addItem('Mississippi', 'openMSbar')
+                .addItem('Missouri', 'openMObar')
+                .addItem('North Carolina', 'openNCbar')
+                .addItem('Oklahoma', 'openOKbar')
+                .addItem('South Carolina', 'openSCbar')
+                .addItem('Tennessee', 'openTNbar')
+                .addItem('Texas', 'openTXbar')
+                .addItem('Virginia', 'openVAbar')
                 )
     /*.addSubMenu(ui.createMenu('Templates (In Development)')
                 .addItem('Project Plan', 'stillDev')
@@ -96,11 +96,83 @@ function openDLbar(){
   DocumentApp.getUi().showSidebar(template);
 }
 
-
+/***************
+   THE STATES
+***************/
 function openALbar(){
   var template = HtmlService.createTemplateFromFile('pages/AL').evaluate().setTitle('Alabama Facts');
   DocumentApp.getUi().showSidebar(template);  
 }
+
+function openARbar(){
+  var template = HtmlService.createTemplateFromFile('pages/AR').evaluate().setTitle('Arkansas Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openFLbar(){
+  var template = HtmlService.createTemplateFromFile('pages/FL').evaluate().setTitle('Florida Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openGAbar(){
+  var template = HtmlService.createTemplateFromFile('pages/GA').evaluate().setTitle('Georgia Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openKYbar(){
+  var template = HtmlService.createTemplateFromFile('pages/KY').evaluate().setTitle('Kentucky Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openLAbar(){
+  var template = HtmlService.createTemplateFromFile('pages/LA').evaluate().setTitle('Louisiana Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openMSbar(){
+  var template = HtmlService.createTemplateFromFile('pages/MS').evaluate().setTitle('Mississippi Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openMObar(){
+  var template = HtmlService.createTemplateFromFile('pages/MO').evaluate().setTitle('Missouri Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openNCbar(){
+  var template = HtmlService.createTemplateFromFile('pages/NC').evaluate().setTitle('North Carolina Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openOKbar(){
+  var template = HtmlService.createTemplateFromFile('pages/OK').evaluate().setTitle('Oklahoma Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openSCbar(){
+  var template = HtmlService.createTemplateFromFile('pages/SC').evaluate().setTitle('South Carolina Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openTNbar(){
+  var template = HtmlService.createTemplateFromFile('pages/TN').evaluate().setTitle('Tennessee Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openTXbar(){
+  var template = HtmlService.createTemplateFromFile('pages/TX').evaluate().setTitle('Texas Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+function openVAbar(){
+  var template = HtmlService.createTemplateFromFile('pages/VA').evaluate().setTitle('Virginia Facts');
+  DocumentApp.getUi().showSidebar(template);  
+}
+
+
+/*********************
+USER ALERT FUNCTIONS
+**********************/
 function stillDev(){
   var ui = DocumentApp.getUi();
    var response = ui.alert('Sorry, this feature is still in development. Please try again later!');
