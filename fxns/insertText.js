@@ -33,7 +33,7 @@ function askAboutInsertSolo(myString){
       var cursor = DocumentApp.getActiveDocument().getCursor(); 
    
       if (cursor) {
-        var element = cursor.insertText(myArr.join('\n\n'));
+        var element = cursor.insertText('\n' + myArr.join('\n\n') + '\n');
         if (!element) {
           DocumentApp.getUi().alert('Cannot insert text here, sorry!');
         }
@@ -52,7 +52,9 @@ function askAboutInsertSolo(myString){
    }
    
       if (cursor) {
+        var beginning = cursor.insertText('\n');
         var element = cursor.insertText(title);
+        var end = cursor.insertText('\n');
         element.setLinkUrl(link);
         if (!element) {
           DocumentApp.getUi().alert('Cannot insert text here, sorry!');
@@ -85,3 +87,43 @@ function insertImage(img) {
   }
   
 }
+
+//https://stackoverflow.com/questions/19987101/how-to-copy-content-and-formatting-between-google-docs
+//https://stackoverflow.com/questions/19894885/how-to-copy-one-or-more-existing-pages-of-a-document-using-google-apps-script/19907943#19907943
+//insert document function to play with
+function importInDoc(documentid) {
+
+  //source document for copying
+  var sourceDoc = DocumentApp.openById(documentid).getBody();
+  
+  //get this document
+  var targetDoc = DocumentApp.getActiveDocument();
+
+  var totalElements = sourceDoc.getNumChildren();
+
+  for( var j = 0; j < totalElements; ++j ) {
+    var body = targetDoc.getBody()
+    var element = sourceDoc.getChild(j).copy();
+    var type = element.getType();
+    if( type == DocumentApp.ElementType.PARAGRAPH ){
+      body.appendParagraph(element);
+    }
+    else if( type == DocumentApp.ElementType.TABLE){
+      body.appendTable(element);
+      }
+    else if( type == DocumentApp.ElementType.LIST_ITEM){
+      body.appendListItem(element);
+      }
+//    ...add other conditions (headers, footers...
+    }
+  targetDoc.saveAndClose();
+}
+
+
+
+
+
+
+
+
+
