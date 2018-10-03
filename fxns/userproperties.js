@@ -30,6 +30,7 @@ function getPageData(){
   
   //else if(activePage == "Home"){ return getData(esText); }
   //states
+
   else if(activePage == "AL"){ return getData(alText); }
   else if(activePage == "AR"){ return getData(arText); }  
   else if(activePage == "FL"){ return getData(flText); } 

@@ -168,7 +168,6 @@ newH = parseInt(newW/ratio);
 }
 myImage.setWidth(newW).setHeight(newH)
 
-  
 }
 
 //https://stackoverflow.com/questions/19987101/how-to-copy-content-and-formatting-between-google-docs
@@ -216,6 +215,7 @@ function getFact(recordNum){
   insertTextAtCursor(insertMe);
   
 }
+
 
 
 

@@ -5,6 +5,7 @@
     
     <div class="m-2 p-2 alert alert-secondary text-center">
     <h5><?= data.title; ?></h5>
+
     <? if(data.hasOwnProperty('image')) { ?>
     <div class="text-center m-2 p-2">
     <img src="<?!= data.image ?>" width="250px">
@@ -30,7 +31,9 @@
         
 		<p><small><?!= facts[i]; ?></small></p>
         <div class="text-center mt-3 ml-3 mr-3 mb-3">
+
 			<button class="action" onclick="google.script.run.getFact(<?!= i; ?>)">Insert Text At Cursor</button>
+
 		</div>
         
         
