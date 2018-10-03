@@ -1,6 +1,6 @@
 
 
-var daLinks = {  
+var daReports = {  
   
   gas: {
     title: 'The Great American Stand',
@@ -62,26 +62,26 @@ var daLinks = {
 };
 
 
-function tgas(){ insertTextAtCursor([daLinks.gas.title]); }
-function cgas(){ insertTextAtCursor([daLinks.gas.cite]); }
-function lgas(){ insertLinkAtCursor(daLinks.gas.link, daLinks.gas.title); }
+function tgas(){ insertTextAtCursor([daReports.gas.title]); }
+function cgas(){ insertTextAtCursor([daReports.gas.cite]); }
+function lgas(){ insertLinkAtCursor(daReports.gas.link, daReports.gas.title); }
 
-function tgasHistory(){ insertTextAtCursor([daLinks.gasHistory.title]); }
-function cgasHistory(){ insertTextAtCursor([daLinks.gasHistory.cite]); }
-function lgasHistory(){ insertLinkAtCursor(daLinks.gasHistory.link, daLinks.gasHistory.title); }
+function tgasHistory(){ insertTextAtCursor([daReports.gasHistory.title]); }
+function cgasHistory(){ insertTextAtCursor([daReports.gasHistory.cite]); }
+function lgasHistory(){ insertLinkAtCursor(daReports.gasHistory.link, daReports.gasHistory.title); }
 
-function tgasIndustry(){ insertTextAtCursor([daLinks.gasIndustry.title]); }
-function cgasIndustry(){ insertTextAtCursor([daLinks.gasIndustry.cite]); }
-function lgasIndustry(){ insertLinkAtCursor(daLinks.gasIndustry.link, daLinks.gasIndustry.title); }
+function tgasIndustry(){ insertTextAtCursor([daReports.gasIndustry.title]); }
+function cgasIndustry(){ insertTextAtCursor([daReports.gasIndustry.cite]); }
+function lgasIndustry(){ insertLinkAtCursor(daReports.gasIndustry.link, daReports.gasIndustry.title); }
 
-function tgasClimatePlan(){ insertTextAtCursor([daLinks.gasClimatePlan.title]); }
-function cgasClimatePlan(){ insertTextAtCursor([daLinks.gasClimatePlan.cite]); }
-function lgasClimatePlan(){ insertLinkAtCursor(daLinks.gasClimatePlan.link, daLinks.gasClimatePlan.title); }
+function tgasClimatePlan(){ insertTextAtCursor([daReports.gasClimatePlan.title]); }
+function cgasClimatePlan(){ insertTextAtCursor([daReports.gasClimatePlan.cite]); }
+function lgasClimatePlan(){ insertLinkAtCursor(daReports.gasClimatePlan.link, daReports.gasClimatePlan.title); }
 
-function ttreasuresSouth(){ insertTextAtCursor([daLinks.treasuresSouth.title]); }
-function ctreasuresSouth(){ insertTextAtCursor([daLinks.treasuresSouth.cite]); }
-function ltreasuresSouth(){ insertLinkAtCursor(daLinks.treasuresSouth.link, daLinks.treasuresSouth.title); }
+function ttreasuresSouth(){ insertTextAtCursor([daReports.treasuresSouth.title]); }
+function ctreasuresSouth(){ insertTextAtCursor([daReports.treasuresSouth.cite]); }
+function ltreasuresSouth(){ insertLinkAtCursor(daReports.treasuresSouth.link, daReports.treasuresSouth.title); }
 
-function tvanishingTreasures(){ insertTextAtCursor([daLinks.vanishingTreasures.title]); }
-function cvanishingTreasures(){ insertTextAtCursor([daLinks.vanishingTreasures.cite]); }
-function lvanishingTreasures(){ insertLinkAtCursor(daLinks.vanishingTreasures.link, daLinks.vanishingTreasures.title); }
+function tvanishingTreasures(){ insertTextAtCursor([daReports.vanishingTreasures.title]); }
+function cvanishingTreasures(){ insertTextAtCursor([daReports.vanishingTreasures.cite]); }
+function lvanishingTreasures(){ insertLinkAtCursor(daReports.vanishingTreasures.link, daReports.vanishingTreasures.title); }
