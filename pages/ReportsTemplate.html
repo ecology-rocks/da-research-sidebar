@@ -1,24 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <!-- Document Head -->
-  <head>
-    <base target="_top">
-    <!-- Add the Google Apps Script CSS file -->
-    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
-    <!-- our friendly neighborhood bootstrap css -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">      
-
-  </head>
-  
-  <!-- Document Body -->
-  <body>
+    <?!= insertHeader() ?>
   
   
   
 <!--?!= include('esText'); ?>  <!-- proof of concept: header-->
 <!-- Object structure: parent -- object { title; text; cite } where title is a string and the others are arrays -->
-   <? var dataKeys = getDataKeys(daLinks); ?>
-   <? var data = getData(daLinks); ?>
+   <? var data = getPageData(); ?>
+   <? var dataKeys = getDataKeys(data); ?>
    <? var total = dataKeys.length; ?>
     
     <!-- for each object in data -->
@@ -44,15 +31,4 @@
         
       <? } ?>
    
-    
-    
-    
-  
-    
-    
-    
-  </body>
-    
-  
-
-</html>
+  <?!= insertFooter(); ?>
