@@ -1,6 +1,6 @@
   <?!= insertHeader() ?>
   
-<!--?!= include('pages/header'); ?>  <!-- proof of concept: header-->
+
 <!-- Object structure: parent -- object { title; text; cite } where title is a string and the others are arrays -->
    <? var data = getPageData(); ?>
    <? var dataKeys = getDataKeys(data); ?>
@@ -10,8 +10,32 @@
    <!--? var data = getData(esText); ?-->
    <? var total = dataKeys.length; ?>
     
-    <!-- for each object in data -->
+    <!-- for each object in data object -->
       <? for (var i = 0; i < dataKeys.length; i++) { ?>
+      
+    <!-- IF THE OBJECT HAS PROPERTIES, LET'S DISPLAY THEM --> 
+    <!-- CITEKEY is different than the plural CITEKEYS which is used in the title/text loop -->
+      <? if(data[dataKeys[i]].hasOwnProperty('citeKey')){ ?>
+         
+            <!-- for each citeKey in data -->
+     
+      <? var reportTitle = findCiteFromLib(data[dataKeys[i]].citeKey); ?>
+      <div class="m-2 p-2 alert alert-secondary text-center">
+     <h5><i>Dive into: </i> <?= reportTitle.linkText; ?></h5>
+     </div>
+    
+       
+        <div class="text-center mt-3 ml-3 mr-3 mb-3">
+    <p><button class="action" onclick="google.script.run.insertLinkAtCursor('<?!= reportTitle.url; ?>', '<?!= reportTitle.linkText; ?>')">Insert Report Link At Cursor</button> </p>
+    </div>
+    <div class="text-center mt-3 ml-3 mr-3 mb-3">
+    <p><button class="action" onclick="google.script.run.insertCiteFromLib('<?!= data[dataKeys[i]].citeKey; ?>')">Insert Citation At Cursor</button> </p>
+    </div>   
+      
+      <? }//end if citeKey ?>
+      
+      <!-- THIS IS FOR REPEATING TITLE, TEXT -->
+      <? if(data[dataKeys[i]].hasOwnProperty('title')){ ?>
       <div class="m-2 p-2 alert alert-secondary text-center">
      <h5><?= data[dataKeys[i]].title; ?></h5>
   </div>
@@ -20,28 +44,47 @@
     <? var myText =data[dataKeys[i]].text; ?>
     <? for (var j = 0; j < myText.length; j++) { ?>
     <p><small> <?!= myText[j]; ?> </small> </p>
-    <? } ?>
+    <? }//end j loop for myText ?>
     
         <div class="text-center mt-3 ml-3 mr-3 mb-3">
-    <button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].tFxn; ?>()">Insert Text At Cursor</button>    
+    <button class="action" onclick="google.script.run.getStory('<?!= dataKeys[i] ?>', 't')">Insert Text At Cursor</button>    
     </div>
+    
+         <!-- IF THERE IS AN IMAGE ASSOCIATED -->
+     <? if(data[dataKeys[i]].hasOwnProperty('image')) { ?>
+     <div class="text-center m-3">
+     <img src="<?!= data[dataKeys[i]].image ?>" width="220">
+     </div>
+     <div class="text-center m-3">
+    <button class="action" onclick="google.script.run.insertImage('<?!= data[dataKeys[i]].image; ?>')"> Insert Image At Cursor </button>
+     </div>
+     
+     
+     <? } //end image property search ?>
+    
+    
     
      </div>
-    
+     <? } // end title property search ?>
+     
 
+     
+     
+     
     
+<!-- THIS IS FOR REPEATING CITEKEYS. NOT EVERY LARGE BLOCK HAS CITE KEYS -->
+    <? if(data[dataKeys[i]].hasOwnProperty('citeKeys')) { ?>
     <div class="ml-1 mr-1">
-    <ul>
-    <? var myCites = data[dataKeys[i]].cite; ?>
-    <? for (var k = 0; k < myCites.length; k++) { ?>
-    <li><small><?!= myCites[k]; ?></small></li>
-    <? } ?>
-    </ul></div>
+    <small>
+    <? var myCites = data[dataKeys[i]].citeKeys; ?>
+    <?!= insertCiteHTMLFromLib(myCites, 'li'); ?>
+    </small>
+    </div>
     
    <div class="text-center mt-3 ml-3 mr-3 mb-3">
-    <button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].cFxn; ?>()">Insert Citation At Cursor</button>    
+    <button class="action" onclick="google.script.run.getStory('<?!= dataKeys[i] ?>', 'c')">Insert Citation At Cursor</button>    
     </div>
         
-      <? } ?>
+      <? }  } //end citeKeys and end i loop ?>
    
   <?!= insertFooter(); ?>

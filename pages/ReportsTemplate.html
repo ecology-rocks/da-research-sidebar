@@ -5,25 +5,34 @@
 <!--?!= include('esText'); ?>  <!-- proof of concept: header-->
 <!-- Object structure: parent -- object { title; text; cite } where title is a string and the others are arrays -->
    <? var data = getPageData(); ?>
-   <? var dataKeys = getDataKeys(data); ?>
-   <? var total = dataKeys.length; ?>
     
-    <!-- for each object in data -->
-      <? for (var i = 0; i < dataKeys.length; i++) { ?>
+    <!-- for each citeKey in data -->
+      <? for (var i = 0; i < data.length; i++) { ?>
+      <? var myData = findCiteFromLib(data[i]); ?>
       <div class="m-2 p-2 alert alert-secondary text-center">
-     <h5><?= data[dataKeys[i]].title; ?></h5>
+     <h5><?= myData.linkText; ?></h5>
   </div>
     
+    
     <div class="ml-2 mr-2 mt-2 mb-2 alert alert-success">
-    <div class="text-center"><a href="<?!= data[dataKeys[i]].link; ?>"><img src="<?!= data[dataKeys[i]].image; ?>" width="200px"></a></div>
-   <p><i><?= data[dataKeys[i]].cite; ?></i></p>
+    
+    <!-- IF THERE IS AN IMAGE -->
+    <? if(myData.image){ ?>
+    <div class="text-center"><a href="<?!= myData.url; ?>"><img src="<?!= myData.image; ?>" width="200px"></a></div>
+    <? } ?>
+    
+    
+   <p><i><?= myData.cite; ?></i></p>
     
         <div class="text-center mt-3 ml-3 mr-3 mb-3">
-    <p><button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].tFxn; ?>()">Insert Title At Cursor</button> </p>
+    <p><button class="action" onclick="google.script.run.insertLinkAtCursor('<?!= myData.url; ?>', '<?!= myData.linkText; ?>')">Insert Link At Cursor</button> </p>
     
-    <p><button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].cFxn; ?>()">Insert Citation At Cursor</button> </p>
-
-    <p><button class="action" onclick="google.script.run.<?!= data[dataKeys[i]].lFxn; ?>()">Insert Link At Cursor</button> </p>
+    <p><button class="action" onclick="google.script.run.insertCiteFromLib('<?!= data[i]; ?>')">Insert Citation At Cursor</button> </p>
+    <!-- IF THERE IS A DIVE DEEPER FUNCTION -->
+    <? if(myData.diveFxn){ ?>
+    <p><button class="action" onclick="google.script.run.<?!= myData.diveFxn; ?>()">Dive Deeper</button></p>
+    <? } ?>
+    
     </div>
     
      </div>

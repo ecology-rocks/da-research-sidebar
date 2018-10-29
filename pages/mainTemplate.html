@@ -1,0 +1,281 @@
+  <?!= insertHeader() ?>
+  
+
+<!-- Object structure: parent -- object { title; text; cite } where title is a string and the others are arrays -->
+   <? 
+   var page = getCollectionData();
+   var citationsdb = Citations();
+   ?>
+<div class="m-1 p-1 bg-light container">
+
+
+<div class="text-center">
+
+<h4><?!= page.title ?></h4>
+
+
+<? if(page.subtitle){ ?>
+<h6 class="card-subtitle mb-1 text-muted"><?!=page.subtitle?></h6>
+<? } ?>
+
+
+<!-- add Go Up Button if needed -->
+<? if(page.goUp){ ?>
+<a class="btn btn-danger m-1 text-white" onClick="google.script.run.serveNewPage('<?!= page.goUp ?>'); return false;">Go Up</a>
+<? } //end goUp test ?>
+
+</div> <!-- end text center -->
+
+<? if(!page.specialView){ // if it's NOT template view ?>
+
+
+<!-- add links for navigation -->
+<? if(page.collections){ ?>
+<div class="card bg-light">
+
+  <div class="card-header bg-info text-white text-center">
+<a role="button" class="text-white" data-toggle="collapse" data-toggle="collapse" href="#inthiscollection" aria-expanded="false" aria-controls="collapseExample">Navigation <i class="fas fa-angle-down"></i></a>
+  </div>
+  
+  <ul class="list-group list-group-flush collapse show" id="inthiscollection">
+  <?
+  page.collections.map(function(val, ind, arr){
+  ?>
+  <li class="list-group-item btn btn-light small"><a onClick="google.script.run.serveNewPage('<?!= val; ?>'); return false;"><?!= collectionsArr[val].title ?></a></li>
+  
+  <?
+  });
+  ?>
+ 
+  </ul>
+</div><!-- end card -->
+
+<? } //end if page has collections ?>
+
+
+<?
+//if the page has citations
+if(page.citations){
+var citations = getItems(page.citations, citationsdb);
+
+//if the page needs bigCitations
+if(page.bigCitations){
+citations.map(function(val){
+?>
+<div class="card p-1 m-1">
+
+
+<!-- TITLE -->
+<h5 class="card-title text-center"><?!= val[1] ?></h5>
+
+<!-- IMAGE -->
+<? if(val[4] && page.citationImages){ ?>
+<img class="card-img-top" src="<?!= val[4] ?>">
+<? } ?>
+<!-- CITATION -->
+<div class="card-body">
+<i><small><?!= val[2] ?></small></i><br />
+<!-- CITATION BUTTON -->
+<a class="btn btn-success text-white m-1" onClick="google.script.run.insertNewCite(<?!= val[0] ?>); return false;">Insert Citation</a>
+
+</div><!-- end card -->
+
+<!-- read more -->
+<? if(val[5]) { ?>
+<a class="btn btn-warning text-white m-1" onClick="google.script.run.serveNewPage('<?!=val[5]?>'); return false;">Read More</a>
+<? } ?>
+
+
+</div>
+
+<?
+});//end citations map
+} else {//if no bigCitations
+?>
+
+<p class="card-text small">
+<ul class="list-group list-group-flush">
+<?
+citations.map(function(val){ 
+?>
+
+    <li class="list-group-item small">
+        <?!= val[2] ?><br />
+        <a class="btn btn-success text-white m-1 small" onClick="google.script.run.insertNewCite('<?!=val[0] ?>'); return false;">Insert Citation</a>
+        <? if(val[5]) { ?>
+        <br />
+<a class="btn btn-warning text-white m-1" onClick="google.script.run.serveNewPage('<?!=val[5]?>'); return false;">Read More</a>
+<? } ?>
+     </li>
+
+
+<? }); //end itemcitation map ?>
+  </ul>
+  </p> <!-- end card -->
+
+
+<?
+} //end else bigCitations
+}//end if citations
+
+?>
+
+<!-- images -->
+<? if(page.images){ 
+ page.images.map(function(image){
+?>
+
+<div class="card p-1 m-1">
+  <img class="card-img-top" src="<?!=image?>">
+  <div class="card-body text-center">
+    <a class="btn btn-primary text-white m-1" onClick="google.script.run.insertImage('<?!= image ?>'); return false;">Insert Image</a>
+  </div>
+</div>
+
+<? 
+}); // end images map
+} //end if page images ?>
+
+
+
+
+
+<!-- items -->
+
+<? if(page.items){
+
+page.items.map(function(item) {
+?>
+<div class="card m-2">
+  <div class="card-body">
+  <? if(item.title){ ?>
+    <h5 class="card-title"><?!= item.title ?></h5>
+    <? } // end if item title ?>
+    <? if(item.subtitle){ ?>
+    <h6 class="card-subtitle text-muted"><?!= item.subtitle ?></h6>
+    <? } //end if item subtitle ?>
+
+<!-- if item has images -->
+<? if(item.images){ ?>
+<? item.images.map(function(itemImage){ ?>
+<img class="card-img-top" src="<?!=itemImage ?>">
+<a class="btn btn-primary text-white m-1" onClick="google.script.run.insertImage('<?!=itemImage; ?>'); return false;">Insert Image</a>
+
+<? }); //end map of itemImage ?>
+<? } //end if item has images ?>
+    
+    
+<?
+item.text.map(function(itemText) {
+?>
+    <p class="card-text small"><?!= itemText; ?></p>
+    <a class="btn btn-success text-white m-1" onClick="google.script.run.insertTextAtCursor('<?!= itemText; ?>'); return false;">Insert Text</a>
+
+<?
+}); //end itemText
+?>
+
+<!-- item citations -->
+
+<? if(item.citations){ ?>
+<p class="card-text small">
+<ul class="list-group list-group-flush">
+<?
+var itemCitations = getItems(item.citations, citationsdb);
+itemCitations.map(function(itemCite){ 
+?>
+
+    <li class="list-group-item small">
+        <?!= itemCite[2] ?>
+        <a class="btn btn-success text-white m-1 small" onClick="google.script.run.insertNewCite('<?!=itemCite[0] ?>'); return false;">Insert Citation</a>
+        <? if(itemCite[5]) { ?>
+<a class="btn btn-warning text-white m-1" onClick="google.script.run.serveNewPage('<?!=itemCite[5]?>'); return false;">Read More</a>
+<? } ?>
+     </li>
+
+
+<? }); //end itemcitation map ?>
+  </ul>
+  </p>
+<? } //end if item has citations ?>
+
+  </div> <!-- end card body -->
+</div><!-- end item card -->
+
+<?
+}); //end map of item
+} // end page items 
+?>
+
+
+<? } else if(page.specialView == 'template'){ //end if not template view ?>
+
+<? //load data
+var templates = pullDB('templates');
+
+var publictemplates = templates.filter(function(template){ return template[2] == 'public'; });
+var mytemplates = templates.filter(function(template){ return template[2] == Session.getActiveUser().getEmail(); });
+?>
+
+<!-- start public templates -->
+<div class="card p-1 m-1">
+  <div class="card-body text-center">
+  <h4 class="card-title">Staff Templates</h4> 
+  <small><a href="https://docs.google.com/spreadsheets/d/1BZVy-NBCc8iDNQdrfmueBsuW68K9Zyqhw2Oo3C3Q0yE/edit#gid=1197799345">Click here to add more templates</a></small>
+<?
+publictemplates.map(function(template){
+?>
+<p class="m-1">
+  <h6 class="card-subtitle"><?!= template[0] ?></h6>
+  <a class="btn btn-primary text-white m-1" onClick="google.script.run.importInDoc('<?!= template[1] ?>'); return false;">Insert Template</a>
+</p>
+  <? }); ?>
+</div>
+</div>
+
+<!-- start MY templates -->
+
+<div class="card p-1 m-1">
+  <div class="card-body text-center">
+  <h4 class="card-title">My Templates</h4> 
+  <small><a href="https://docs.google.com/spreadsheets/d/1BZVy-NBCc8iDNQdrfmueBsuW68K9Zyqhw2Oo3C3Q0yE/edit#gid=1197799345">Click here to add more of <i>your</i> templates</a></small>
+<?
+mytemplates.map(function(template){
+?>
+<p class="m-1">
+  <h6 class="card-subtitle"><?!= template[0] ?></h6>
+  <a class="btn btn-primary text-white m-1" onClick="google.script.run.importInDoc('<?!= template[1] ?>'); return false;">Insert Template</a>
+</p>
+  <? }); ?>
+</div>
+</div>
+
+<?
+} else if(page.specialView == 'calculator') { ?>
+
+<div class="card p-1 m-1">
+  <div class="card-body text-center">
+  <h4 class="card-title"><?!= page.title ?></h4> 
+<?
+var calculators = page.calculators;
+calculators.map(function(calculator){
+?>
+<p class="m-1">
+<h6 class="card-subtitle"><?!= calculator.name ?></h6>
+  <a class="btn btn-primary text-white m-1" onClick="google.script.run.<?!= calculator.fxn ?>(); return false;">Open Calculator</a>
+</p>
+  <? }); ?>
+</div>
+</div>
+
+
+
+<?} else {} //end else if template view ?>
+
+</div> <!-- end container -->
+
+
+
+
+   
+  <?!= insertFooter(); ?>

@@ -1,7 +1,8 @@
 function createMyMenu(){
   var ui = DocumentApp.getUi();
   var menu = ui.createMenu('Sam\'s Research Menu');
-  menu.addItem('Home', 'openHome');
+  menu.addItem('Open Sidebar', 'testMainTemplate');
+ /* menu.addItem('Test', 'testMainTemplate');
   
   var amDataKeys = getDataKeys(appMap);
   
@@ -22,7 +23,7 @@ function createMyMenu(){
     
     menu.addSubMenu(submenu);
     
-  }//end i loop
+  }//end i loop*/
   
   menu.addToUi();
 }
@@ -38,6 +39,37 @@ function servePage(data, page, title){
 
 
 
+
+//seve templated HTML with data key, template, and title
+function serveNewPage(id, page){
+
+//set default page value
+if(!page){ page = 'pages/mainTemplate'; };
+
+    setCollectionUP(id);
+  var template = HtmlService.createTemplateFromFile(page).evaluate().setTitle('Sam\'s Research Menu');
+  DocumentApp.getUi().showSidebar(template);
+}
+
+function testMainTemplate(){
+  serveNewPage(0, 'pages/mainTemplate');
+};
+
+/******************
+NON TOP LEVEL PAGES
+******************/
+
+function openAHOFbar(){
+  servePage('AHOF', 'pages/LargeBlocksTemplate', 'A History of Forests');
+};
+
+function openIIbar(){
+  servePage('II', 'pages/LargeBlocksTemplate', 'Industry Impacts on US Forests');
+}
+
+function openTCPbar(){
+  servePage('TCP', 'pages/LargeBlocksTemplate', 'Seeing The Forest: Nature\'s Solution To Climate Change');
+}
 /*****************
 HIGH LEVEL PAGES
 *****************/
@@ -54,11 +86,33 @@ function openFCbar(){
   servePage('FC','pages/LargeBlocksTemplate','Forests & Climate Information');
 }
 
+function openESRbar(){
+  servePage('ESR', 'pages/LargeBlocksTemplate', 'Treasures of the South Summary');
+}
+
 function openReports(){
   servePage('DAR', 'pages/ReportsTemplate', 'Dogwood Alliance Reports');
-  //var template = HtmlService.createTemplateFromFile('pages/DAR').evaluate().setTitle('Dogwood Alliance Report Links');
- // DocumentApp.getUi().showSidebar(template);
 }
+
+function openGASB(){
+  servePage('GASB', 'pages/ReportsTemplate', 'Great American Stand Series');
+} 
+
+function openFS(){
+  servePage('FS', 'pages/ReportsTemplate', 'Dogwood Alliance Fact Sheets');
+}
+            
+/***************
+    PLATFORMS
+***************/
+function openS4F(){
+  servePage('S4F', 'pages/PlatformTemplate', 'Stand4Forests Platform');
+}
+
+function openWFI(){
+  servePage('WFI', 'pages/PlatformTemplate', 'Wetland Forest Initiative Platform');
+}
+
 
 /***************
    THE STATES
@@ -124,9 +178,14 @@ function openVAbar(){
 
 /*********************
 TEMPLATE INSERTIONS
+this info added to srm
 *********************/
 function projectTemplate(){
   importInDoc('11zdES1xBa8l765h0vqJtJlRZgM5dshofg1trHUj7eXE');
+}
+
+function wfiProjectTemplate(){
+  importInDoc('1CXU10Clej2ZNalo-QOLWGG_1A0lf2xz__4MgL3ivJ7g');
 }
 
 function marketingTemplate(){
@@ -141,13 +200,16 @@ function smTemplate(){
   importInDoc('1znif259_Vp-p-kTu6nJ6hSR2tCeMrrcuztgMfJAewk0');
 }
 
+function wfiNotesTemplate(){
+  importInDoc('1KqiG3nUXcz_YgJNq6VzIbi7Huwb-86Ud0TssOK7i4bw');
+}
+
 /*********************
 USER ALERT FUNCTIONS
 **********************/
 function stillDev(){
   var ui = DocumentApp.getUi();
    var response = ui.alert('Sorry, this feature is still in development. Please try again later!');
-  
 }
 
 /* If you're just serving static HTML (unlikely) you can use this type of function instead. */

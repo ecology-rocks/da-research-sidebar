@@ -1,3 +1,4 @@
+//imported entire into srm
 
 var alText = {
   title: 'How much are Alabama wetland forests worth?',

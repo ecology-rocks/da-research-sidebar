@@ -1,17 +1,17 @@
   <?!= insertHeader() ?>
  
    <? var data = getPageData(); ?>
-
+   <? var citation = findCiteFromLib(data.citeKey); ?>
     
     <div class="m-2 p-2 alert alert-secondary text-center">
     <h5><?= data.title; ?></h5>
     
-    <? if(data.hasOwnProperty('image')) { ?>
+    <? if(citation.hasOwnProperty('image')) { ?>
     <div class="text-center m-2 p-2">
-    <img src="<?!= data.image ?>" width="220px">
+    <img src="<?!= citation.image ?>" width="220px">
     </div>
     <div class="text-center m-3">
-    <button class="action" onclick="google.script.run.insertImage('<?!= data.image; ?>')"> Insert Image At Cursor </button>
+    <button class="action" onclick="google.script.run.insertImage('<?!= citation.image; ?>')"> Insert Image At Cursor </button>
     </div>
     <? } ?>
     
@@ -20,12 +20,7 @@
     <button class="action" onclick="google.script.run.insertCiteFromLib('<?!= data.citeKey; ?>')"> Insert Citation At Cursor</button>
     </div>
     <? } ?>
-    
-    <? if(data.hasOwnProperty('otherLink')) { ?>
-    <div class="text-center mt-3 ml-3 mr-3 mb-3">
-    <button class="action" onclick="google.script.run.insertLinkAtCursor('<?!= data.otherLink; ?>', '<?!= data.title; ?>')">Insert State Report At Cursor</button>
-    </div>   
-    <? } ?>
+ 
     
     </div>
     

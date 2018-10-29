@@ -1,3 +1,4 @@
+//this info added to srm
 var appMap = {
 
   calculators: {
@@ -14,7 +15,9 @@ var appMap = {
     title: 'Dogwood Resources', 
     items: {
       daMission: 'Dogwood Mission', 
-      openReports: 'Reports',     
+      openReports: 'Reports',
+      openGASB: 'Great American Stand Briefs',
+      openFS: 'Fact Sheets',
     },
   },
   
@@ -23,7 +26,16 @@ var appMap = {
     items: {
       openESbar: 'Ecosystem Services',
       openFCbar: 'Forests & Climate',
+      openESRbar: 'Treasures of the South',
     }, 
+  },
+  
+  platforms: {
+    title: 'Platforms',
+    items: {
+      openS4F: 'Stand 4 Forests',
+      openWFI: 'Wetland Forest Initiative',
+    },
   },
   
   ESRFacts: {
@@ -53,6 +65,8 @@ var appMap = {
       marketingTemplate: 'Marketing Plan',
       notesTemplate: 'Meeting Notes', 
       smTemplate: 'Social Media Toolkit',
+      wfiProjectTemplate: 'WFI Coalition Project Plan',
+      wfiNotesTemplate: 'WFI Notes Template',
     }
     
   },

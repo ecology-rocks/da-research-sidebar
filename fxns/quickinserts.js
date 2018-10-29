@@ -8,9 +8,11 @@ function insertHeader() {
       '<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">'+
         '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">' +      
           '<link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">' + 
+          '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">' +
             '</head><body>' + 
               ' <div class="m-2 p-2 text-center"><span style="font-family: \'Lobster Two\', cursive;"><img src="https://i.imgur.com/9WeUrTo.png"><b>Sam\'s Research Menu</b> &nbsp; &nbsp; </span>';
-  header += insertNav();
+   header += '<button class="bg-primary text-dark rounded " onClick="google.script.run.serveNewPage(0)">Go Home</button>';
+  //header += insertNav();
   header += '</div></div>';
   return header;
 }
